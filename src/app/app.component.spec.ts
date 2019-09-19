@@ -1,35 +1,44 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { TreeComponent } from './tree/tree.component';
+import { CommonModule } from '@angular/common';
 
 describe('AppComponent', () => {
+  let fixture: ComponentFixture<AppComponent>;
+  let app: AppComponent;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        CommonModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        TreeComponent
       ],
     }).compileComponents();
   }));
 
+  beforeEach(()=> {
+    fixture = TestBed.createComponent(AppComponent);
+    app = fixture.debugElement.componentInstance;
+  })
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it(`should have as title 'menu'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('menu');
   });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('menu app is running!');
+  it('Should update node with key visible if node was not previously open', () => {
+    const node = {}
+    app.selected(node);
+    expect(node).toEqual({visible: true});
+  });
+  it('Should update node with key invisible if node was previously visible', () => {
+    const node = {visible: true}
+    app.selected(node);
+    expect(node).toEqual({visible: false});
   });
 });
