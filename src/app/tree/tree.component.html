@@ -1,0 +1,16 @@
+<li *ngFor="let sub of tree[key]">
+    <input type="checkbox" (click)="selected(sub)"/> {{sub.name}} 
+    <ng-container *ngIf="sub.visible">
+        <ul *ngFor="let related of tree.related">
+            <li>
+                <input type="checkbox" (click)="selected(related)"/> {{related.name}} 
+                <ng-container *ngIf="related.visible">
+                    <p>You might also like</p>
+                    <li *ngFor="let choice of related.choices">
+                        <input type="checkbox"/> {{choice.name}}
+                    </li>
+                </ng-container>
+            </li>   
+        </ul>
+    </ng-container>
+</li>
