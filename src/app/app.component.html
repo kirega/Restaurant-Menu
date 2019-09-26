@@ -1,9 +1,3 @@
 <h2>Restaurant Menu</h2>
-  <ul *ngFor="let node of menu">
-    <li>
-      <input type="checkbox" (click)="selected(node)"/> {{node.name}}
-      <ul>
-        <app-tree *ngIf="node.visible" [tree]="node" key="choices" ></app-tree>
-      </ul>
-    </li>
-  </ul>
+
+<app-tree [menu]="menu"></app-tree>

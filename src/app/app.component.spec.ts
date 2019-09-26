@@ -31,14 +31,4 @@ describe('AppComponent', () => {
   it(`should have as title 'menu'`, () => {
     expect(app.title).toEqual('menu');
   });
-  it('Should update node with key visible if node was not previously open', () => {
-    const node = {}
-    app.selected(node);
-    expect(node).toEqual({visible: true});
-  });
-  it('Should update node with key invisible if node was previously visible', () => {
-    const node = {visible: true}
-    app.selected(node);
-    expect(node).toEqual({visible: false});
-  });
 });

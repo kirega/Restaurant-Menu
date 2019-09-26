@@ -6,13 +6,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./tree.component.css']
 })
 export class TreeComponent implements OnInit {
-  @Input() tree: any;
-  @Input() key: string;
+  @Input() menu: object;
   constructor() { }
 
   ngOnInit() {
   }
-  selected(node: any) {
-    node['visible'] = node['visible'] ? false : true;
+
+  selected(node) {
+    node["visible"] = node["visible"] ? false : true;
   }
 }

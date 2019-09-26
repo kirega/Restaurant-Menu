@@ -11,7 +11,7 @@ describe('TreeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TreeComponent ],
-     
+
     })
     .compileComponents();
   }));
@@ -23,20 +23,15 @@ describe('TreeComponent', () => {
   });
 
   it('should create', () => {
-    component.key ="choices"
-    component.tree = {
+    component.menu = {
       name: "test",
-      choices: [{name: "hey"}]
+      choices: [{name: "hey"}],
+      related: []
     };
-    // fixture.detectChanges();
-    // // console.log(component);
-    // let node = {}
-    // component.selected(node);
-    console.log(component);
     expect(component).toBeTruthy();
   });
   it('Should update node with key visible if node was not previously open', () => {
-    const node = {}
+    const node = {};
     component.selected(node);
     expect(node).toEqual({visible: true});
   });

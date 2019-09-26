@@ -52,9 +52,4 @@ export class AppComponent {
       ]
     }
   ];
-
-  selected(node) {
-    node["visible"] = node["visible"] ? false : true;
-  }
-
 }

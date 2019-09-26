@@ -1,18 +1,19 @@
-<ng-container *ngIf="tree">
-    <li *ngFor="let sub of tree[key]"> 
-        <input type="checkbox" (click)="selected(sub)"/> {{sub.name}} 
-        <ng-container *ngIf="sub?.visible">
-            <ul *ngFor="let related of tree.related">
-                <li>
-                    <input type="checkbox" (click)="selected(related)"/> {{related.name}} 
-                    <ng-container *ngIf="related?.visible">
-                        <p>You might also like</p>
-                        <li *ngFor="let choice of related.choices">
-                            <input type="checkbox"/> {{choice.name}}
-                        </li>
-                    </ng-container>
-                </li>   
-            </ul>
-        </ng-container>
-    </li>
+<!--recursive solution to a nested tree-->
+<ng-container *ngTemplateOutlet="submenu; context: {$implicit: menu}">
 </ng-container>
+<ng-template #submenu let-menu>
+  <ul>
+    <li *ngFor="let node of menu; let i=index;">
+      <input type="checkbox" (click)="selected(node)"/> {{node.name}}
+      <ng-container *ngIf="node.visible">
+        <ng-container *ngTemplateOutlet="submenu; context: {$implicit: node.choices}">
+        </ng-container>
+        <ng-container *ngIf="node.related && node.related.length > 0">
+          <p>You might also like</p>
+          <app-tree [menu]="node.related"></app-tree>
+        </ng-container>
+      </ng-container>
+    </li>
+  </ul>
+</ng-template>
+
